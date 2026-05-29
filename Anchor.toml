@@ -1,0 +1,21 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+settlement = "8omCC2Q9SwwfRJQNkJ9UnFairpzHFkaWSeEd5nXjcooy"
+
+[programs.devnet]
+settlement = "8omCC2Q9SwwfRJQNkJ9UnFairpzHFkaWSeEd5nXjcooy"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test"
+
+[hooks]
