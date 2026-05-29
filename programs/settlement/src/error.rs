@@ -12,4 +12,6 @@ pub enum SettlementError {
     ZeroQuoteAmount,
     #[msg("Account count does not match trades (need 4 accounts per trade)")]
     AccountCountMismatch,
+    #[msg("token_program must be the SPL Token program (TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA)")]
+    WrongTokenProgram,
 }
