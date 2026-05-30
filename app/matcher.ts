@@ -43,16 +43,17 @@ const PROGRAM_ID = new PublicKey(
     "8omCC2Q9SwwfRJQNkJ9UnFairpzHFkaWSeEd5nXjcooy"
 );
 
-// Engine keypair — this is the settlement authority.
-// In prod this would be a hardware wallet or multi-sig.
-// For the demo, we generate one or load from file.
-const ENGINE_KEYPAIR_PATH =
-  process.env.ENGINE_KEYPAIR_PATH ||
-  path.join(process.env.HOME || "~", ".config/solana/id.json");
-
+// Engine keypair — load from ENGINE_KEYPAIR env var (JSON array) in prod,
+// fall back to file path for local dev.
 let engineKeypair: Keypair;
 try {
-  const raw = JSON.parse(fs.readFileSync(ENGINE_KEYPAIR_PATH, "utf-8"));
+  const raw = process.env.ENGINE_KEYPAIR
+    ? JSON.parse(process.env.ENGINE_KEYPAIR)
+    : JSON.parse(fs.readFileSync(
+        process.env.ENGINE_KEYPAIR_PATH ||
+        path.join(process.env.HOME || "~", ".config/solana/id.json"),
+        "utf-8"
+      ));
   engineKeypair = Keypair.fromSecretKey(Uint8Array.from(raw));
 } catch {
   engineKeypair = Keypair.generate();
